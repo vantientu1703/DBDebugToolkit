@@ -111,7 +111,10 @@
 #pragma mark - DBConsoleOutputCaptorDelegate 
 
 - (void)consoleOutputCaptorDidUpdateOutput:(DBConsoleOutputCaptor *)consoleOutputCaptor {
-    [self reloadConsole];
+    __weak DBConsoleViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf reloadConsole];
+    });
 }
 
 - (void)consoleOutputCaptor:(DBConsoleOutputCaptor *)consoleOutputCaptor didSetEnabled:(BOOL)enabled {

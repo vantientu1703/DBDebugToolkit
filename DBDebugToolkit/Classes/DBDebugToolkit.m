@@ -179,6 +179,11 @@ static NSString *const DBDebugToolkitObserverPresentationControllerPropertyKeyPa
     toolkit.networkToolkit.loggingEnabled = enabled;
 }
 
++ (void)setFilterHosts:(NSArray<NSString *> *)hosts {
+    DBDebugToolkit *toolkit = [DBDebugToolkit sharedInstance];
+    toolkit.networkToolkit.filterHosts = hosts;
+}
+
 #pragma mark - User interface toolkit
 
 - (void)setupUserInterfaceToolkit {

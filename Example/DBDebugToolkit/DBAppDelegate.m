@@ -25,6 +25,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [DBDebugToolkit setupWithTriggers: @[ [DBShakeTrigger trigger], [DBTapTrigger trigger], [DBLongPressTrigger trigger]]];
+    [DBDebugToolkit setFilterHosts:@[@"jsonplaceholder.typicode.com"]];
     [self setupUserDefaultsExample];
     [self setupKeychainExample];
     [self setupCoreData];

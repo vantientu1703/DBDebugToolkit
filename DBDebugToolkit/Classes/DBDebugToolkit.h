@@ -209,4 +209,8 @@
  */
 + (void)handleClearDataShortcutItemAction NS_AVAILABLE_IOS(9_0);
 
++ (instancetype)sharedInstance;
+
++ (void)setFilterHosts: (NSArray<NSString *> *) hosts;
+
 @end

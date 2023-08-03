@@ -25,6 +25,7 @@
 #import "DBNetworkToolkit.h"
 #import "DBRequestOutcome.h"
 #import "DBAuthenticationChallengeSender.h"
+#import "DBDebugToolkit.h"
 
 static NSString *const DBURLProtocolHandledKey = @"DBURLProtocolHandled";
 
@@ -58,8 +59,10 @@ static NSString *const DBURLProtocolHandledKey = @"DBURLProtocolHandled";
 }
 
 - (void)startLoading {
-    [[DBNetworkToolkit sharedInstance] saveRequest:self.request];
+    
     NSMutableURLRequest *request = [[DBURLProtocol canonicalRequestForRequest:self.request] mutableCopy];
+    
+    [[DBNetworkToolkit sharedInstance] saveRequest:self.request];
     
     [DBURLProtocol setProperty:@YES forKey:DBURLProtocolHandledKey inRequest:request];
     
@@ -74,7 +77,6 @@ static NSString *const DBURLProtocolHandledKey = @"DBURLProtocolHandled";
     }
     
     [[self.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
         if (error != nil) {
             [self finishWithOutcome:[DBRequestOutcome outcomeWithError:error]];
             [self.client URLProtocol:self didFailWithError:error];

@@ -48,6 +48,7 @@ Class DBNetworkURLProtocolClass;
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _filterHosts = [NSArray new];
         [self setupOperationQueue];
         [self resetLoggedData];
     }
@@ -118,6 +119,10 @@ Class DBNetworkURLProtocolClass;
 }
 
 - (void)saveRequest:(NSURLRequest *)request {
+    NSString *host = request.URL.host;
+    if (![_filterHosts containsObject:host]) {
+        return;;
+    }
     [self.operationQueue addOperationWithBlock:^{
         DBRequestModel *requestModel = [DBRequestModel requestModelWithRequest:request];
         requestModel.delegate = self;
@@ -128,6 +133,10 @@ Class DBNetworkURLProtocolClass;
 }
 
 - (void)saveRequestOutcome:(DBRequestOutcome *)requestOutcome forRequest:(NSURLRequest *)request {
+    NSString *host = request.URL.host;
+    if (![_filterHosts containsObject:host]) {
+        return;;
+    }
     [self.operationQueue addOperationWithBlock:^{
         DBRequestModel *requestModel = [self.runningRequestsModels objectForKey:request.description];
         [requestModel saveOutcome:requestOutcome];

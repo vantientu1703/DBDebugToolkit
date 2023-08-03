@@ -110,4 +110,6 @@ extern Class DBNetworkURLProtocolClass;
  */
 @property (nonatomic, readonly) NSArray *savedRequests;
 
+@property (nonatomic, retain) NSArray<NSString *> *filterHosts;
+
 @end

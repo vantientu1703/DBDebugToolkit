@@ -35,6 +35,7 @@ typedef int File_Writer_t(void *, const char *, int);
 @property (nonatomic, assign) int originalStderrFileDescriptor;
 @property (nonatomic, strong) NSPipe *stderrPipe;
 @property (nonatomic, strong) NSFileHandle *stderrPipeReadHandle;
+@property (nonatomic, assign) NSUInteger maximumItems;
 
 @end
 
@@ -46,6 +47,7 @@ typedef int File_Writer_t(void *, const char *, int);
     self = [super init];
     if (self) {
         _consoleOutput = [NSString string];
+        _maximumItems = 1000;
     }
     
     return self;
