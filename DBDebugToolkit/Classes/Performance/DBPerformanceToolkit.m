@@ -26,7 +26,7 @@
 #import <mach/mach.h>
 
 static const NSUInteger DBPerformanceToolkitMeasurementsCount = 120;
-static const NSTimeInterval DBPerformanceToolkitTimeBetweenMeasurements = 1.0;
+static const NSTimeInterval DBPerformanceToolkitTimeBetweenMeasurements = 0.1;
 
 @interface DBPerformanceToolkit ()
 
